@@ -1,11 +1,11 @@
 const buttons = document.querySelectorAll("button");
-const cartSection = document.querySelector("#kosik p");
+const cartSection = document.querySelector("#cart p");
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCart() {
     localStorage.setItem("cart", JSON.stringify(cart));
-    cartSection.textContent = cart.length > 0 ? `V košíku je ${cart.length} položek.` : "Košík je prázdný.";
+    cartSection.textContent = cart.length > 0 ? `Your cart has ${cart.length} item(s).` : "Your cart is empty.";
 }
 
 buttons.forEach(button => {
@@ -17,3 +17,4 @@ buttons.forEach(button => {
 });
 
 updateCart();
+
