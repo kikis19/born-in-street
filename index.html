@@ -1,96 +1,94 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Born in Street</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Born in Street</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="#tshirts">T-Shirts</a></li>
-                    <li><a href="#hoodies">Hoodies</a></li>
-                    <li><a href="#pants">Pants</a></li>
-                    <li><a href="#accessories">Accessories</a></li>
-                    <li><a href="#cart">Cart</a></li>
-                    <li><a href="#info">Information</a></li>
-                </ul>
-            </nav>
-        </header>
-    
-        <main>
-            <section id="tshirts">
-                <h2>T-Shirts</h2>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#tshirts">T-Shirts</a></li>
+                <li><a href="#hoodies">Hoodies</a></li>
+                <li><a href="#sweatpants">Sweatpants</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+                <li><a href="#cart">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="tshirts">
+            <h2>T-Shirts</h2>
+            <div class="products">
                 <div class="product">
                     <img src="images/tshirt1.jpg" alt="T-shirt 1">
-                    <p>T-shirt 1 - $25.99</p>
-                    <button>Add to Cart</button>
+                    <p>T-shirt 1</p>
+                    <button onclick="openModal('tshirt1')">View Details</button>
                 </div>
                 <!-- Add more products here -->
-            </section>
-    
-            <section id="hoodies">
-                <h2>Hoodies</h2>
+            </div>
+        </section>
+
+        <section id="hoodies">
+            <h2>Hoodies</h2>
+            <div class="products">
                 <div class="product">
                     <img src="images/hoodie1.jpg" alt="Hoodie 1">
-                    <p>Hoodie 1 - $45.99</p>
-                    <button>Add to Cart</button>
+                    <p>Hoodie 1</p>
+                    <button onclick="openModal('hoodie1')">View Details</button>
                 </div>
                 <!-- Add more products here -->
-            </section>
-    
-            <section id="pants">
-                <h2>Pants</h2>
+            </div>
+        </section>
+
+        <section id="sweatpants">
+            <h2>Sweatpants</h2>
+            <div class="products">
                 <div class="product">
-                    <img src="images/pants1.jpg" alt="Pants 1">
-                    <p>Pants 1 - $35.99</p>
-                    <button>Add to Cart</button>
+                    <img src="images/sweatpants1.jpg" alt="Sweatpants 1">
+                    <p>Sweatpants 1</p>
+                    <button onclick="openModal('sweatpants1')">View Details</button>
                 </div>
                 <!-- Add more products here -->
-            </section>
-    
-            <section id="accessories">
-                <h2>Accessories</h2>
+            </div>
+        </section>
+
+        <section id="accessories">
+            <h2>Accessories</h2>
+            <div class="products">
                 <div class="product">
                     <img src="images/accessory1.jpg" alt="Accessory 1">
-                    <p>Accessory 1 - $12.99</p>
-                    <button>Add to Cart</button>
+                    <p>Accessory 1</p>
+                    <button onclick="openModal('accessory1')">View Details</button>
                 </div>
                 <!-- Add more products here -->
-            </section>
-    
-            <section id="cart">
-                <h2>Cart</h2>
-                <p>Your cart is empty.</p>
-            </section>
-    
-            <section id="info">
-                <h2>Store Information</h2>
-                <p>Born in Street is a fashion e-commerce store offering high-quality clothing and accessories at great prices. We bring street style to your wardrobe!</p>
-            </section>
-        </main>
-    
-        <footer>
-            <p>&copy; 2025 Born in Street</p>
-        </footer>
-    
-        <script src="script.js"></script>
-       
-    
+            </div>
+        </section>
 
-    
-       
-    
-    
+        <section id="cart">
+            <h2>Cart</h2>
+            <p>Your cart is empty.</p>
+        </section>
+    </main>
+
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-images"></div>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Born in Street</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
