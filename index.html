@@ -1,110 +1,65 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!DOCTYPE html>
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Born in Street</title>
+    <title>Born in Street - Clothing</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">Born in Street</div>
-    </header>
-    <!-- Zbytek tvé stránky -->
-</body>
-</html>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Born in Street</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <!-- Horní šedá lišta -->
     <header>
         <nav>
             <ul>
-                <li><a href="#tshirts">T-Shirts</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#hoodies">Hoodies</a></li>
+                <li><a href="#shirts">Shirts</a></li>
                 <li><a href="#sweatpants">Sweatpants</a></li>
                 <li><a href="#accessories">Accessories</a></li>
                 <li><a href="#cart">Cart</a></li>
             </ul>
         </nav>
+        <h1>Born in Street</h1>
     </header>
 
+    <!-- Úvodní stránka s produkty -->
     <main>
-        <section id="tshirts">
-            <h2>T-Shirts</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="images/tshirt1.jpg" alt="T-shirt 1">
-                    <p>T-shirt 1</p>
-                    <button onclick="openModal('tshirt1')">View Details</button>
+        <section id="home" class="intro">
+            <h2>Vyberte si svůj produkt</h2>
+            <div class="product-category">
+                <div class="category-box" id="hoodies">
+                    <img src="path/to/your/image1.jpg" alt="Hoodies">
+                    <p>Hoodies</p>
                 </div>
-                <!-- Add more products here -->
+                <div class="category-box" id="shirts">
+                    <img src="path/to/your/image2.jpg" alt="Shirts">
+                    <p>Shirts</p>
+                </div>
+                <div class="category-box" id="sweatpants">
+                    <img src="path/to/your/image3.jpg" alt="Sweatpants">
+                    <p>Sweatpants</p>
+                </div>
+                <div class="category-box" id="accessories">
+                    <img src="path/to/your/image4.jpg" alt="Accessories">
+                    <p>Accessories</p>
+                </div>
             </div>
         </section>
 
-        <section id="hoodies">
-            <h2>Hoodies</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="images/hoodie1.jpg" alt="Hoodie 1">
-                    <p>Hoodie 1</p>
-                    <button onclick="openModal('hoodie1')">View Details</button>
-                </div>
-                <!-- Add more products here -->
-            </div>
-        </section>
-
-        <section id="sweatpants">
-            <h2>Sweatpants</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="images/sweatpants1.jpg" alt="Sweatpants 1">
-                    <p>Sweatpants 1</p>
-                    <button onclick="openModal('sweatpants1')">View Details</button>
-                </div>
-                <!-- Add more products here -->
-            </div>
-        </section>
-
-        <section id="accessories">
-            <h2>Accessories</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="images/accessory1.jpg" alt="Accessory 1">
-                    <p>Accessory 1</p>
-                    <button onclick="openModal('accessory1')">View Details</button>
-                </div>
-                <!-- Add more products here -->
-            </div>
-        </section>
-
-        <section id="cart">
+        <!-- Košík -->
+        <section id="cart" class="cart">
             <h2>Cart</h2>
             <p>Your cart is empty.</p>
         </section>
     </main>
 
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-images"></div>
-            <button>Add to Cart</button>
-        </div>
-    </div>
-
     <footer>
-        <p>&copy; 2025 Born in Street</p>
+        <p>&copy; 2025 Born in Street. Všechna práva vyhrazena.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
 
