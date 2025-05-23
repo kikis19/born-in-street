@@ -4,6 +4,56 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* styles.css */
+
+header {
+    background-color: #ccc; /* světle šedá barva */
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.product-category {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.category-box {
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease;
+}
+
+.category-box:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.category-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
 
 /* Celkový styl pro stránku */
 body {
