@@ -1,65 +1,159 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Born in Street - Clothing</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Born In Street</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .top-bar {
+      background: #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      position: relative;
+    }
+    .top-bar h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+    }
+    .sidebar, .cart {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 250px;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 100;
+    }
+    .sidebar { left: 0; }
+    .cart { right: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .card {
+      height: 32rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
+      padding: 1rem;
+    }
+    .image-placeholder {
+      background: #eee;
+      height: 20rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    .back-arrow {
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+    .hidden { display: none; }
+  </style>
 </head>
 <body>
-    <link rel="stylesheet" href="styles.css">
 
+  <div class="top-bar">
+    <div id="left-section">
+      <span id="menu-icon" class="icon">&#9776;</span>
+    </div>
+    <h1>born in street</h1>
+    <div>
+      <span id="search-icon" class="icon">&#128269;</span>
+      <span id="cart-icon" class="icon">&#128722;</span>
+    </div>
+  </div>
 
-    <!-- Horní šedá lišta -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#hoodies">Hoodies</a></li>
-                <li><a href="#shirts">Shirts</a></li>
-                <li><a href="#sweatpants">Sweatpants</a></li>
-                <li><a href="#accessories">Accessories</a></li>
-                <li><a href="#cart">Cart</a></li>
-            </ul>
-        </nav>
-        <h1>Born in Street</h1>
-    </header>
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar hidden">
+    <h2>Kategorie</h2>
+    <ul>
+      <li><a href="#" class="category-link">hoodies</a></li>
+      <li><a href="#" class="category-link">tshirt</a></li>
+      <li><a href="#" class="category-link">sweatpants</a></li>
+      <li><a href="#" class="category-link">accessories</a></li>
+    </ul>
+  </div>
 
-    <!-- Úvodní stránka s produkty -->
-    <main>
-        <section id="home" class="intro">
-            <h2>Vyberte si svůj produkt</h2>
-            <div class="product-category">
-                <div class="category-box" id="hoodies">
-                    <img src="path/to/your/image1.jpg" alt="Hoodies">
-                    <p>Hoodies</p>
-                </div>
-                <div class="category-box" id="shirts">
-                    <img src="path/to/your/image2.jpg" alt="Shirts">
-                    <p>Shirts</p>
-                </div>
-                <div class="category-box" id="sweatpants">
-                    <img src="path/to/your/image3.jpg" alt="Sweatpants">
-                    <p>Sweatpants</p>
-                </div>
-                <div class="category-box" id="accessories">
-                    <img src="path/to/your/image4.jpg" alt="Accessories">
-                    <p>Accessories</p>
-                </div>
-            </div>
-        </section>
+  <!-- Cart -->
+  <div id="cart" class="cart hidden">
+    <h2>Košík</h2>
+    <p>Zatím prázdný.</p>
+  </div>
 
-        <!-- Košík -->
-        <section id="cart" class="cart">
-            <h2>Cart</h2>
-            <p>Your cart is empty.</p>
-        </section>
-    </main>
+  <!-- Content -->
+  <div id="content">
+    <div id="product-grid" class="grid">
+      <div class="card"><div class="image-placeholder"></div><h3>hoodies</h3></div>
+      <div class="card"><div class="image-placeholder"></div><h3>tshirt</h3></div>
+      <div class="card"><div class="image-placeholder"></div><h3>sweatpants</h3></div>
+      <div class="card"><div class="image-placeholder"></div><h3>accessories</h3></div>
+    </div>
+  </div>
 
-    <footer>
-        <p>&copy; 2025 Born in Street. Všechna práva vyhrazena.</p>
-    </footer>
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const cartIcon = document.getElementById("cart-icon");
+    const sidebar = document.getElementById("sidebar");
+    const cart = document.getElementById("cart");
+    const categoryLinks = document.querySelectorAll(".category-link");
+    const content = document.getElementById("content");
+    const topBar = document.querySelector(".top-bar");
+    const leftSection = document.getElementById("left-section");
 
-    <script src="script.js"></script>
+    menuIcon.onclick = () => {
+      sidebar.classList.toggle("hidden");
+    };
+
+    cartIcon.onclick = () => {
+      cart.classList.toggle("hidden");
+    };
+
+    categoryLinks.forEach(link => {
+      link.onclick = (e) => {
+        e.preventDefault();
+        const category = e.target.textContent;
+        showCategory(category);
+        sidebar.classList.add("hidden");
+      };
+    });
+
+    function showCategory(category) {
+      content.innerHTML = `
+        <div style="padding: 1rem;">
+          <div style="display: flex; align-items: center;">
+            <span class="back-arrow" onclick="goBack()">&#8592;</span>
+            <h2>${category}</h2>
+          </div>
+          <div class="grid">
+            ${Array.from({length: 6}).map((_, i) => `
+              <div class="card">
+                <div class="image-placeholder"></div>
+                <h3>${category} ${i+1}</h3>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function goBack() {
+      location.reload(); // nebo přepiš zpět na homepage bez reloadu
+    }
+  </script>
 </body>
 </html>
