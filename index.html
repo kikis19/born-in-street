@@ -45,12 +45,15 @@
       padding: 1rem;
     }
     .card {
-      height: 32rem;
+      height: 34rem;
       border: 1px solid #ddd;
       border-radius: 8px;
       text-align: center;
       padding: 1rem;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .image-placeholder {
       background: #eee;
@@ -64,6 +67,31 @@
       margin-right: 1rem;
     }
     .hidden { display: none; }
+
+    .add-button {
+      padding: 0.5rem 1rem;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .search-box {
+      display: none;
+      position: absolute;
+      top: 4.5rem;
+      right: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      z-index: 1000;
+    }
+
+    .search-box input {
+      padding: 0.5rem;
+      width: 200px;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +105,11 @@
       <span id="search-icon" class="icon">&#128269;</span>
       <span id="cart-icon" class="icon">&#128722;</span>
     </div>
+  </div>
+
+  <!-- Vyhledávání -->
+  <div id="search-box" class="search-box">
+    <input type="text" id="search-input" placeholder="Vyhledat kategorii..." />
   </div>
 
   <!-- Sidebar -->
@@ -118,6 +151,10 @@
     const productGrid = document.getElementById("product-grid");
     const productHeader = document.getElementById("product-header");
 
+    const searchIcon = document.getElementById("search-icon");
+    const searchBox = document.getElementById("search-box");
+    const searchInput = document.getElementById("search-input");
+
     menuIcon.onclick = () => {
       sidebar.classList.toggle("hidden");
     };
@@ -125,6 +162,23 @@
     cartIcon.onclick = () => {
       cart.classList.toggle("hidden");
     };
+
+    searchIcon.onclick = () => {
+      searchBox.style.display = searchBox.style.display === "block" ? "none" : "block";
+      searchInput.focus();
+    };
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const term = searchInput.value.trim().toLowerCase();
+        if (["hoodies", "tshirt", "sweatpants", "accessories"].includes(term)) {
+          showCategory(term);
+          searchBox.style.display = "none";
+        } else {
+          alert("Kategorie nenalezena");
+        }
+      }
+    });
 
     categoryLinks.forEach(link => {
       link.onclick = (e) => {
@@ -155,6 +209,7 @@
           <div class="card">
             <div class="image-placeholder"></div>
             <h3>${category} ${i+1}</h3>
+            <button class="add-button">Přidat do košíku</button>
           </div>
         `).join('')}
       `;
@@ -168,7 +223,6 @@
         <div class="card category-card" data-category="sweatpants"><div class="image-placeholder"></div><h3>sweatpants</h3></div>
         <div class="card category-card" data-category="accessories"><div class="image-placeholder"></div><h3>accessories</h3></div>
       `;
-      // znovu navázat klikací události na nové prvky
       document.querySelectorAll(".category-card").forEach(card => {
         card.onclick = () => {
           const category = card.getAttribute("data-category");
