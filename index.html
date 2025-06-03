@@ -35,6 +35,7 @@
       padding: 1rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       z-index: 100;
+      overflow-y: auto;
     }
     .sidebar { left: 0; }
     .cart { right: 0; }
@@ -50,7 +51,6 @@
       border-radius: 8px;
       text-align: center;
       padding: 1rem;
-      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -92,6 +92,20 @@
       padding: 0.5rem;
       width: 200px;
     }
+
+    .close-cart {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.8rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 0.5rem 0;
+    }
   </style>
 </head>
 <body>
@@ -125,8 +139,11 @@
 
   <!-- Cart -->
   <div id="cart" class="cart hidden">
+    <span class="close-cart" id="close-cart">&times;</span>
     <h2>Košík</h2>
-    <p>Zatím prázdný.</p>
+    <div id="cart-items">
+      <p>Zatím prázdný.</p>
+    </div>
   </div>
 
   <!-- Content -->
@@ -143,25 +160,24 @@
   <script>
     const menuIcon = document.getElementById("menu-icon");
     const cartIcon = document.getElementById("cart-icon");
+    const closeCart = document.getElementById("close-cart");
     const sidebar = document.getElementById("sidebar");
     const cart = document.getElementById("cart");
+    const cartItems = document.getElementById("cart-items");
     const categoryLinks = document.querySelectorAll(".category-link");
     const categoryCards = document.querySelectorAll(".category-card");
     const content = document.getElementById("content");
     const productGrid = document.getElementById("product-grid");
     const productHeader = document.getElementById("product-header");
-
     const searchIcon = document.getElementById("search-icon");
     const searchBox = document.getElementById("search-box");
     const searchInput = document.getElementById("search-input");
 
-    menuIcon.onclick = () => {
-      sidebar.classList.toggle("hidden");
-    };
+    let basket = [];
 
-    cartIcon.onclick = () => {
-      cart.classList.toggle("hidden");
-    };
+    menuIcon.onclick = () => sidebar.classList.toggle("hidden");
+    cartIcon.onclick = () => cart.classList.toggle("hidden");
+    closeCart.onclick = () => cart.classList.add("hidden");
 
     searchIcon.onclick = () => {
       searchBox.style.display = searchBox.style.display === "block" ? "none" : "block";
@@ -183,16 +199,14 @@
     categoryLinks.forEach(link => {
       link.onclick = (e) => {
         e.preventDefault();
-        const category = e.target.textContent;
-        showCategory(category);
+        showCategory(e.target.textContent);
         sidebar.classList.add("hidden");
       };
     });
 
     categoryCards.forEach(card => {
       card.onclick = () => {
-        const category = card.getAttribute("data-category");
-        showCategory(category);
+        showCategory(card.getAttribute("data-category"));
       };
     });
 
@@ -203,16 +217,13 @@
           <h2>${category}</h2>
         </div>
       `;
-
-      productGrid.innerHTML = `
-        ${Array.from({length: 6}).map((_, i) => `
-          <div class="card">
-            <div class="image-placeholder"></div>
-            <h3>${category} ${i+1}</h3>
-            <button class="add-button">Přidat do košíku</button>
-          </div>
-        `).join('')}
-      `;
+      productGrid.innerHTML = Array.from({ length: 6 }).map((_, i) => `
+        <div class="card">
+          <div class="image-placeholder"></div>
+          <h3>${category} ${i + 1}</h3>
+          <button class="add-button" onclick="addToCart('${category} ${i + 1}')">Přidat do košíku</button>
+        </div>
+      `).join('');
     }
 
     function goBack() {
@@ -220,17 +231,4 @@
       productGrid.innerHTML = `
         <div class="card category-card" data-category="hoodies"><div class="image-placeholder"></div><h3>hoodies</h3></div>
         <div class="card category-card" data-category="tshirt"><div class="image-placeholder"></div><h3>tshirt</h3></div>
-        <div class="card category-card" data-category="sweatpants"><div class="image-placeholder"></div><h3>sweatpants</h3></div>
-        <div class="card category-card" data-category="accessories"><div class="image-placeholder"></div><h3>accessories</h3></div>
-      `;
-      document.querySelectorAll(".category-card").forEach(card => {
-        card.onclick = () => {
-          const category = card.getAttribute("data-category");
-          showCategory(category);
-        };
-      });
-    }
-  </script>
-</body>
-</html>
-
+        <div class="card category-card" data-category="s
