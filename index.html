@@ -97,6 +97,7 @@
 
   <!-- Content -->
   <div id="content">
+    <div id="product-header"></div>
     <div id="product-grid" class="grid">
       <div class="card"><div class="image-placeholder"></div><h3>hoodies</h3></div>
       <div class="card"><div class="image-placeholder"></div><h3>tshirt</h3></div>
@@ -112,8 +113,8 @@
     const cart = document.getElementById("cart");
     const categoryLinks = document.querySelectorAll(".category-link");
     const content = document.getElementById("content");
-    const topBar = document.querySelector(".top-bar");
-    const leftSection = document.getElementById("left-section");
+    const productGrid = document.getElementById("product-grid");
+    const productHeader = document.getElementById("product-header");
 
     menuIcon.onclick = () => {
       sidebar.classList.toggle("hidden");
@@ -133,26 +134,33 @@
     });
 
     function showCategory(category) {
-      content.innerHTML = `
-        <div style="padding: 1rem;">
-          <div style="display: flex; align-items: center;">
-            <span class="back-arrow" onclick="goBack()">&#8592;</span>
-            <h2>${category}</h2>
-          </div>
-          <div class="grid">
-            ${Array.from({length: 6}).map((_, i) => `
-              <div class="card">
-                <div class="image-placeholder"></div>
-                <h3>${category} ${i+1}</h3>
-              </div>
-            `).join('')}
-          </div>
+      // Vymažeme starý header
+      productHeader.innerHTML = `
+        <div style="display: flex; align-items: center; padding: 1rem;">
+          <span class="back-arrow" onclick="goBack()">&#8592;</span>
+          <h2>${category}</h2>
         </div>
+      `;
+
+      // Vytvoříme novou mřížku produktů
+      productGrid.innerHTML = `
+        ${Array.from({length: 6}).map((_, i) => `
+          <div class="card">
+            <div class="image-placeholder"></div>
+            <h3>${category} ${i+1}</h3>
+          </div>
+        `).join('')}
       `;
     }
 
     function goBack() {
-      location.reload(); // nebo přepiš zpět na homepage bez reloadu
+      productHeader.innerHTML = '';
+      productGrid.innerHTML = `
+        <div class="card"><div class="image-placeholder"></div><h3>hoodies</h3></div>
+        <div class="card"><div class="image-placeholder"></div><h3>tshirt</h3></div>
+        <div class="card"><div class="image-placeholder"></div><h3>sweatpants</h3></div>
+        <div class="card"><div class="image-placeholder"></div><h3>accessories</h3></div>
+      `;
     }
   </script>
 </body>
