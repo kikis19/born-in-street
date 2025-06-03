@@ -231,4 +231,34 @@
       productGrid.innerHTML = `
         <div class="card category-card" data-category="hoodies"><div class="image-placeholder"></div><h3>hoodies</h3></div>
         <div class="card category-card" data-category="tshirt"><div class="image-placeholder"></div><h3>tshirt</h3></div>
-        <div class="card category-card" data-category="s
+        <div class="card category-card" data-category="sweatpants"><div class="image-placeholder"></div><h3>sweatpants</h3></div>
+        <div class="card category-card" data-category="accessories"><div class="image-placeholder"></div><h3>accessories</h3></div>
+      `;
+      // znovu přidáme eventy
+      document.querySelectorAll(".category-card").forEach(card => {
+        card.onclick = () => {
+          showCategory(card.getAttribute("data-category"));
+        };
+      });
+    }
+
+    function addToCart(productName) {
+      basket.push(productName);
+      updateCart();
+      // zobraz košík při přidání produktu
+      cart.classList.remove("hidden");
+    }
+
+    function updateCart() {
+      if (basket.length === 0) {
+        cartItems.innerHTML = '<p>Zatím prázdný.</p>';
+      } else {
+        cartItems.innerHTML = basket.map(item => `<div class="cart-item">${item}</div>`).join('');
+      }
+    }
+
+    // Na začátku znovu přidáme eventy pro hlavní stránku
+    goBack();
+  </script>
+</body>
+</html>
